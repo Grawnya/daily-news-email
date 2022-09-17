@@ -17,12 +17,18 @@ for each in media_content:
     # heading_text = heading_text.replace('\n', '')
     # heading_text = heading_text.strip(' ')
     # news_headings.append(heading_text)
-    try:
-        secondary_text = each.find("p").get_text()
-    except:
-        secondary_text = 'No supporting text supplied, access the link for more info'
-    secondary_text = secondary_text.replace('\n', '')
-    secondary_text = secondary_text.replace('"', '')
-    secondary_text = secondary_text.strip(' ')
-    supporting_info.append(secondary_text)
-print(supporting_info)
+    link = each.find_next("a").get('href')
+    link = link.replace('\n', '')
+    link = link.strip(' ')
+    if 'https' not in link:
+        link = URL + link[1:]
+    links.append(link)
+    # try:
+    #     secondary_text = each.find("p").get_text()
+    # except:
+    #     secondary_text = 'No supporting text supplied, access the link for more info'
+    # secondary_text = secondary_text.replace('\n', '')
+    # secondary_text = secondary_text.replace('"', '')
+    # secondary_text = secondary_text.strip(' ')
+    # supporting_info.append(secondary_text)
+print(links)
