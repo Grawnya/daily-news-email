@@ -7,9 +7,9 @@ page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, "html.parser")
 
-media_content = website.WebsiteInformation(URL, soup)
-
-media_content.scraped_values('div', soup, 'media__content')
+media_content = website.WebsiteInformation(URL, soup, 'div', 'media__content')
+headings = media_content.headings('h3')
+print(headings)
 
 # media_content = soup.find_all('div', class_='media__content')
 

@@ -12,7 +12,7 @@ class WebsiteInformation:
         website_content = html.find_all(tag, class_= identifying_class)
         return website_content
     
-    def headings(self, tag, heading_title):
+    def headings(self, heading_tag):
         '''docstring'''
         headings = []
         website_content = self.scraped_values
@@ -22,3 +22,18 @@ class WebsiteInformation:
             heading_text = heading_text.strip(' ')
             headings.append(heading_text)
         return headings
+    
+    def secondary_info(self, secondary_tag):
+        '''docstring'''
+        secondary = []
+        website_content = self.scraped_values
+        for each in website_content:
+            try:
+                secondary_text = each.find(secondary_tag).get_text()
+            except:
+                secondary_text = 'No supporting text supplied, access the link for more info'
+            secondary_text = secondary_text.replace('\n', '')
+            secondary_text = secondary_text.replace('"', '')
+            secondary_text = secondary_text.strip(' ')
+            secondary.append(secondary_text)
+        return secondary_tag
