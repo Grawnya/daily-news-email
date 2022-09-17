@@ -1,3 +1,5 @@
+import pandas as pd
+
 class WebsiteInformation:
 
     def __init__(self, website_name, html, tag, identifying_class):
@@ -50,3 +52,6 @@ class WebsiteInformation:
                 link = self.website_name + link[1:]
             links.append(link)
         return links
+    
+    def news_dataframe(self):
+        '''docstring'''
