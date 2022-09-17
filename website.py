@@ -17,7 +17,7 @@ class WebsiteInformation:
         headings = []
         website_content = self.scraped_values
         for each in website_content:
-            heading_text = each.find(heading_title).get_text()
+            heading_text = each.find(heading_tag).get_text()
             heading_text = heading_text.replace('\n', '')
             heading_text = heading_text.strip(' ')
             headings.append(heading_text)
@@ -36,4 +36,17 @@ class WebsiteInformation:
             secondary_text = secondary_text.replace('"', '')
             secondary_text = secondary_text.strip(' ')
             secondary.append(secondary_text)
-        return secondary_tag
+        return secondary
+
+    def links(self, link_tag):
+        '''docstring'''
+        links = []
+        website_content = self.scraped_values
+        for each in website_content:
+            link = each.find_next(link_tag).get('href')
+            link = link.replace('\n', '')
+            link = link.strip(' ')
+            if 'https' not in link:
+                link = self.website_name + link[1:]
+            links.append(link)
+        return links

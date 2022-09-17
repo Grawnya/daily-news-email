@@ -9,7 +9,11 @@ soup = BeautifulSoup(page.content, "html.parser")
 
 media_content = website.WebsiteInformation(URL, soup, 'div', 'media__content')
 headings = media_content.headings('h3')
+secondary = media_content.secondary_info('p')
+links = media_content.links('a')
 print(headings)
+print(secondary)
+print(links)
 
 # media_content = soup.find_all('div', class_='media__content')
 
