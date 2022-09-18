@@ -2,7 +2,7 @@ import pandas as pd
 
 class WebsiteInformation:
 
-    def __init__(self, website_name, html, tag, identifying_class, heading_tag, secondary_tag, link_tag):
+    def __init__(self, website_name, html, type_of_news, tag, identifying_class, heading_tag, secondary_tag, link_tag):
         self.website_name = website_name
         self.html = html
         self.tag = tag
@@ -10,7 +10,13 @@ class WebsiteInformation:
         self.heading_tag = heading_tag
         self.secondary_tag = secondary_tag
         self.link_tag = link_tag
+        self.type_of_news = type_of_news
     
+    def tags_based_on_news_type(self):
+        '''docstring'''
+        if self.type_of_news == 'general':
+            return
+
     def scraped_values(self):
         '''docstring'''
         website_content = self.html.find_all(self.tag, class_= self.identifying_class)
@@ -61,4 +67,4 @@ class WebsiteInformation:
 
 class BBC(WebsiteInformation):
     def __init__(self, website_name, html):
-        super().__init__(website_name, html, tag='div', identifying_class='media__content', heading_tag='h3', secondary_tag='p', link_tag='a')
+        super().__init__(website_name, html, type_of_news, tag='div', identifying_class='media__content', heading_tag='h3', secondary_tag='p', link_tag='a')

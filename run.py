@@ -18,8 +18,13 @@ SHEET = GSPREAD_CLIENT.open('daily_news')
 news_worksheet = SHEET.worksheet('news')
 news_worksheet.clear()
 
+# ask for news source: BBC, CNN, AL Jazeera
+
 URL = "https://www.bbc.com/"
 page = requests.get(URL)
+
+# ask for type of news
+
 
 soup = BeautifulSoup(page.content, "html.parser")
 
