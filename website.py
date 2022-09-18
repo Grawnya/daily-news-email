@@ -16,16 +16,26 @@ class WebsiteInformation:
         website_content = self.html.find_all(self.tag, class_= self.identifying_class)
         return website_content
     
-    def headings(self):
+    def clean_title_values(self, value_text):
         '''docstring'''
-        headings = []
+        value_text_cleaned = value_text.replace('\n', '')
+        value_text_cleaned = value_text_cleaned.replace('"', '')
+        value_text_cleaned = value_text_cleaned.strip(' ')
+        return value_text_cleaned
+
+    def title_values(self, value_location):
+        '''docstring'''
+        values = []
         website_content = self.scraped_values()
         for each in website_content:
-            heading_text = each.find(self.heading_tag).get_text()
-            heading_text = heading_text.replace('\n', '')
-            heading_text = heading_text.strip(' ')
-            headings.append(heading_text)
-        return headings
+            value_text = value_location.get_text()
+            value_text = self.clean_title_values(value_text)
+            values.append(value_text)
+        return values
+
+    def headings(self):
+        '''docstring'''
+        return self.title_values(each.find(self.heading_tag))
     
     def secondary_info(self):
         '''docstring'''
@@ -58,7 +68,6 @@ class WebsiteInformation:
     def news_dataframe(self):
         '''docstring'''
         df = pd.DataFrame({'Headings':self.headings(),'Secondary Info':self.secondary_info(), 'Links':self.links()})
-        print(df)
         return df
 
 class BBC(WebsiteInformation):
