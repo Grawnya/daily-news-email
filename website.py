@@ -11,9 +11,6 @@ class WebsiteInformation:
         self.secondary_tag = secondary_tag
         self.link_tag = link_tag
         self.scraped_values = self.scraped_values(self.tag, self.html, self.identifying_class)
-        self.headings = self.headings(self.heading_tag)
-        self.secondary_info = self.secondary_info(self.secondary_tag)
-        self.links = self.links(self.link_tag)
     
     def scraped_values(self, tag, html, identifying_class):
         '''docstring'''
