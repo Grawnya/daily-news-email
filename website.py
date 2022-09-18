@@ -60,3 +60,7 @@ class WebsiteInformation:
         df = pd.DataFrame({'Headings':self.headings(),'Secondary Info':self.secondary_info(), 'Links':self.links()})
         print(df)
         return df
+
+class BBC(WebsiteInformation):
+    def __init__(self, website_name, html):
+        super().__init__(website_name, html, tag='div', identifying_class='media__content', heading_tag='h3', secondary_tag='p', link_tag='a')

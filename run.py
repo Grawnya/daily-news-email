@@ -7,7 +7,7 @@ page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, "html.parser")
 
-media_content = website.WebsiteInformation(URL, soup, 'div', 'media__content', 'h3', 'p', 'a')
+media_content = website.BBC(URL, soup)
 # headings = media_content.headings()
 # secondary = media_content.secondary_info()
 # links = media_content.links()
