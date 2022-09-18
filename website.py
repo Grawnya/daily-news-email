@@ -10,17 +10,16 @@ class WebsiteInformation:
         self.heading_tag = heading_tag
         self.secondary_tag = secondary_tag
         self.link_tag = link_tag
-        self.scraped_values = self.scraped_values(self.tag, self.html, self.identifying_class)
     
-    def scraped_values(self, tag, html, identifying_class):
+    def scraped_values(self):
         '''docstring'''
-        website_content = html.find_all(tag, class_= identifying_class)
+        website_content = self.html.find_all(self.tag, class_= self.identifying_class)
         return website_content
     
     def headings(self):
         '''docstring'''
         headings = []
-        website_content = self.scraped_values
+        website_content = self.scraped_values()
         for each in website_content:
             heading_text = each.find(self.heading_tag).get_text()
             heading_text = heading_text.replace('\n', '')
@@ -31,7 +30,7 @@ class WebsiteInformation:
     def secondary_info(self):
         '''docstring'''
         secondary = []
-        website_content = self.scraped_values
+        website_content = self.scraped_values()
         for each in website_content:
             try:
                 secondary_text = each.find(self.secondary_tag).get_text()
@@ -46,7 +45,7 @@ class WebsiteInformation:
     def links(self):
         '''docstring'''
         links = []
-        website_content = self.scraped_values
+        website_content = self.scraped_values()
         for each in website_content:
             link = each.find_next(self.link_tag).get('href')
             link = link.replace('\n', '')
@@ -58,3 +57,6 @@ class WebsiteInformation:
     
     def news_dataframe(self):
         '''docstring'''
+        df = pd.DataFrame({'Headings':self.headings(),'Secondary Info':self.secondary_info(), 'Links':self.links()})
+        print(df)
+        return df
