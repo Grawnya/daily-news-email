@@ -8,7 +8,4 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, "html.parser")
 
 media_content = website.BBC(URL, soup)
-# headings = media_content.headings()
-# secondary = media_content.secondary_info()
-# links = media_content.links()
-links = media_content.news_dataframe()
+dataframe = media_content.news_dataframe()
