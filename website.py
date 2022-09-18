@@ -28,14 +28,13 @@ class WebsiteInformation:
         values = []
         website_content = self.scraped_values()
         for each in website_content:
-            value_text = value_location.get_text()
-            value_text = self.clean_title_values(value_text)
+            value_text = self.clean_title_values(value_location)
             values.append(value_text)
         return values
 
-    def headings(self):
+    def headings(self, each_heading):
         '''docstring'''
-        return self.title_values(each.find(self.heading_tag))
+        return self.title_values(each_heading.find(self.heading_tag).get_text())
     
     def secondary_info(self):
         '''docstring'''
@@ -46,9 +45,7 @@ class WebsiteInformation:
                 secondary_text = each.find(self.secondary_tag).get_text()
             except:
                 secondary_text = 'No supporting text supplied, access the link for more info'
-            secondary_text = secondary_text.replace('\n', '')
-            secondary_text = secondary_text.replace('"', '')
-            secondary_text = secondary_text.strip(' ')
+            secondary_text= self.clean_title_values(secondary_text)
             secondary.append(secondary_text)
         return secondary
 
