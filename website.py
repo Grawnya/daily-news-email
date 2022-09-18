@@ -17,46 +17,38 @@ class WebsiteInformation:
         return website_content
     
     def clean_title_values(self, value_text):
-        '''docstring'''
         value_text_cleaned = value_text.replace('\n', '')
         value_text_cleaned = value_text_cleaned.replace('"', '')
         value_text_cleaned = value_text_cleaned.strip(' ')
         return value_text_cleaned
 
-    def title_values(self, value_location):
+    def headings(self):
         '''docstring'''
-        values = []
-        website_content = self.scraped_values()
-        for each in website_content:
-            value_text = self.clean_title_values(value_location)
-            values.append(value_text)
-        return values
-
-    def headings(self, each_heading):
-        '''docstring'''
-        return self.title_values(each_heading.find(self.heading_tag).get_text())
+        headings = []
+        for each in self.scraped_values():
+            heading_text = each.find(self.heading_tag).get_text()
+            heading_text = self.clean_title_values(heading_text)
+            headings.append(heading_text)
+        return headings
     
     def secondary_info(self):
         '''docstring'''
         secondary = []
-        website_content = self.scraped_values()
-        for each in website_content:
+        for each in self.scraped_values():
             try:
                 secondary_text = each.find(self.secondary_tag).get_text()
             except:
                 secondary_text = 'No supporting text supplied, access the link for more info'
-            secondary_text= self.clean_title_values(secondary_text)
+            secondary_text = self.clean_title_values(secondary_text)
             secondary.append(secondary_text)
         return secondary
 
     def links(self):
         '''docstring'''
         links = []
-        website_content = self.scraped_values()
-        for each in website_content:
+        for each in self.scraped_values():
             link = each.find_next(self.link_tag).get('href')
-            link = link.replace('\n', '')
-            link = link.strip(' ')
+            link = self.clean_title_values(link)
             if 'https' not in link:
                 link = self.website_name + link[1:]
             links.append(link)
@@ -65,6 +57,7 @@ class WebsiteInformation:
     def news_dataframe(self):
         '''docstring'''
         df = pd.DataFrame({'Headings':self.headings(),'Secondary Info':self.secondary_info(), 'Links':self.links()})
+        print(df)
         return df
 
 class BBC(WebsiteInformation):

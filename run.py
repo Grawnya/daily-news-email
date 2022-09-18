@@ -1,8 +1,6 @@
 import requests
 import website
-import yagmail
 from bs4 import BeautifulSoup
-yag = yagmail.SMTP('dailynewsemail22@gmail.com', oauth2_file='creds.json')
 
 URL = "https://www.bbc.com/"
 page = requests.get(URL)
