@@ -66,5 +66,14 @@ class WebsiteInformation:
         return df
 
 class BBC(WebsiteInformation):
-    def __init__(self, website_name, html):
+    def __init__(self, website_name, html, type_of_news):
         super().__init__(website_name, html, type_of_news, tag='div', identifying_class='media__content', heading_tag='h3', secondary_tag='p', link_tag='a')
+
+    def tags_based_on_news_type(self):
+        '''docstring'''
+        if self.type_of_news == 'general':
+            return
+        elif self.type_of_news == 'sport':
+            self.tag = 'a'
+            self.identifying_class = 'e1f5wbog0'
+            self.heading_tag = 'span'
