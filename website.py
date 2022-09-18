@@ -57,7 +57,6 @@ class WebsiteInformation:
     def news_dataframe(self):
         '''docstring'''
         df = pd.DataFrame({'Headings':self.headings(),'Secondary Info':self.secondary_info(), 'Links':self.links()})
-        print(df)
         return df
 
 class BBC(WebsiteInformation):
