@@ -26,9 +26,11 @@ page = requests.get(URL)
 # ask for type of news
 type_of_news = input('What type of news do you want info on and list:\n')
 
+updated_URL = URL + type_of_news
+print(updated_URL)
 soup = BeautifulSoup(page.content, "html.parser")
 
-media_content = website.BBC(URL, soup, type_of_news)
+media_content = website.BBC(updated_URL, soup, type_of_news)
 dataframe = media_content.news_dataframe()
 news_worksheet.update([dataframe.columns.values.tolist()] + dataframe.values.tolist())
 link_to_google_sheet = r'https://docs.google.com/spreadsheets/d/143icvVJJeDVEQsTzTy1y-brqLPJZwOX-WHkro4dN4lM/edit?usp=sharing'
